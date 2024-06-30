@@ -1,31 +1,31 @@
-import { Component } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
 import PropTypes from "prop-types";
-import styles from "../styles/ContactForm.module.css"
+import styles from "../styles/ContactForm.module.css";
 
+const Filter = ({ filter, onChange }) => {
+  const searchId = nanoid();
 
-export default class Filter extends Component {
-  static propTypes = {
-    filter: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
+  return (
+    <div className={styles.filterContainer}>
+      <label className={styles.phonebookFormLabels} htmlFor={searchId}>
+        Find contact
+      </label>
+      <input
+        className={styles.phonebookFormInputs}
+        type="text"
+        id={searchId}
+        name="filter"
+        value={filter}
+        onChange={onChange}
+      />
+    </div>
+  );
+};
 
-  render() {
-    const { filter, onChange } = this.props;
-    const searchId = nanoid();
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
-    return (
-      <div className={styles.filterContainer}>
-        <label className={styles.phonebookFormLabels} htmlFor={searchId}>Find contact</label>
-        <input
-          className={styles.phonebookFormInputs}
-          type="text"
-          id={searchId}
-          name="filter"
-          value={filter}
-          onChange={onChange}
-        />
-      </div>
-    );
-  }
-}
+export default Filter;
